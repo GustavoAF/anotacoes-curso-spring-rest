@@ -1,0 +1,30 @@
+CONCEITOS
+
+O Spring usa o conceito de Convention of Configuration, ou seja convenção de configuração. Foram analisadas as melhores configurações do mercado e padronizadas para o Spring, não sendo necessário nenhum tipo de configuração. Mas é importante lembrar que ele não gera código, ele simplesmente se auto configura.
+
+Injeção de Dependencias
+
+O que é? Injeção de dependencia é quando uma classe passa a depender de outra, por exemplo a classe Cliente provavelmente vai depender da classe Pessoa, passando um extends para tal. A injeção acontece quando temos que instanciar uma classe Pessoa para que seja possível usar um objeto da Classe Cliente. Daí um o nome "Ïnjeção de Depência". No java puro, esse controle deve ser feito pelo programador, e além de trabalhoso podemos fazer com que nossa aplicação tenha um acoplamento muito alto, ou seja várias classes podem depender de várias outras classes.
+Uma coisa muito bacana do Framework Spring, é que ele controla isso pra você, toda a instanciação das classes é feita pelo String e guardado no Container chamado de IoC. Falando de uma forma resumida, todo new de uma classe marcada com determinadas anotações, é feito pelo Spring, e toda dependencia é tambem controlada por ele.
+O Spring é tão inteligente que ele sabe ate qual o momento de criar cada Bean.
+
+Mas para que esse controle de injeção de dependencia possa ser feito pelo framework é necessário avisa-lo quando queremos esse controle automatico. Podemos fazer isso de várias maneiras, abaixo temos uma explicação de cada anotação que determina essa ação.
+
+Ioc vem de Inversion of control ou Inversão de Controle, ou seja o controle não é mais seu e sim do Container.
+
+O Springboot possui um classloader, que é uma classe responsável em ler a estrutura das classes do projeto e inseri-lo na memoria. O springboot cria dois classloaders um chamado de base e outro de restart. As classes que estamos criando e alterando são inseridas no classloader reestart. Sendo assim no momento de reiniciar a aplicação ele somente reinicia as classes do classloader de reestart, tornando o inicialização muito mais rápida.
+
+Arquivo POM - Project Object Model
+
+stereotypes
+
+A base de todo o funcionamento do Spring consiste no conceito de metaprogramação, que pode ser declarado através de XML ou anotações. Desde o Spring 3.0 a tendência passou a ser a eliminação de configuração da aplicação via XML e a adoção de configuração programática via código Java e via anotações. Uma parcela desta tendência é a possibilidade de criar objetos complexos através da anotação @Bean. Hoje em dia é possível configurar toda sua aplicação com Spring utilizando apenas código Java e anotações. Por exemplo, para declararmos uma classe como gerenciada pelo container de IoC/DI do Spring, basta anotá-la com @Component. Dessa forma, ela já será instanciada, registrada no container e estará pronta para o uso dentro da aplicação.
+No entanto, ter todas as classes do sistema anotadas com @Component é muito genérico, pois estamos apenas dizendo que tais classes são componentes (beans) gerenciados pelo Spring. Um desenvolvedor olhando para o código teria que se basear pelo nome da classe ou pacote para distinguir se a classe se trata de um DAO, serviço ou um managed bean.
+Pensando nisso e levando em conta que a arquitetura da maioria das aplicações Java são divididas em camadas, o Spring resolveu adicionar algumas anotações que possuem um significado mais claro para o desenvolvedor e para as principais camadas de uma aplicação. Este conceito de ter anotações com uma semântica melhor definida é chamado de Stereotypes. Além da anotação @Component, o Spring nos fornece mais 3 (três) anotações, @Contoller, @Service e @Repository. Cada uma delas denota uma responsabilidade dentro das camadas da aplicação, como podemos ver abaixo:
+@Contoller - Utilizada para a camada de apresentação. Normalmente anotamos classes que representam a interação do usuário, como managed beans, actions e controllers;
+@Service - Utilizada para a camada de aplicação e negócio. Comumente usada para anotar classes que denotam serviços de aplicação e de regras de negócio;
+@Repository - Utilizada para a camada de persistência. Normalmente anotamos classes que representam um DAO, Repositório etc;
+@Component - Utilizada para classes que não se encaixam em nenhuma das anotações acima. É comum anotar classes utils, parsers, helpers, processadores de arquivo etc;
+É importante salientar que @Component é a anotação mais genérica do Spring e que as outras 3 anotações são especializações dela, isto é, elas herdam de @Component. Portanto, no geral a prática de anotar uma classe com qualquer uma das anotações não faz diferença para o Spring, mas semanticamente importa para a arquitetura da aplicação e principalmente para o desenvolvedor
+
+
